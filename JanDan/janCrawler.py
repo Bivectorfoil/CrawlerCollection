@@ -53,22 +53,45 @@ def Download(index):
             continue
             time.sleep(3)
         response = req.content
-        #suffix_name = '.'+url.split('.')[-1]#get the suffix name of image
-        suffix_name = url.split('/')[-1]#get the suffix name of image
+        suffix_name = '.'+url.split('.')[-1]#get the suffix name of image
         storage_path = save_dir + str(conuts) + suffix_name
         with open(storage_path,'wb') as f:
             f.write(response)
         #log('Download %s,img%d'%(index,conuts))
         conuts += 1
 
+#def main():
+#    start = time.time()
+#    start_page = int(raw_input('What is th number of page you want to start? '))
+#    end_page = int(raw_input('What is th number of page you want to end? '))
+#    while end_page < start_page:
+#        print 'wrong input,the start is over the end.Try again please'
+#        start_page = int(raw_input('What is th number of page you want to start? '))
+#        end_page = int(raw_input('What is th number of page you want to end? '))
+#    for i in range(start_page,end_page+1):
+#        URL = 'http://jandan.net/ooxx/page-'
+#        base_url = URL + str(i)
+#        index = 'page%d' % i
+#        total_img_collections[index] = []
+#        #log('Crawling in page %d....' % i)
+#        getUrlList(base_url,index)
+#        Download(index)
+#        time.sleep(3)
+#    end = time.time()
+#    log('we all spend '+str(end-start) + ' seconds to crawl %d pages'%(end_page-start_page+1))
 def main():
     start = time.time()
-    start_page = int(raw_input('What is th number of page you want to start? '))
-    end_page = int(raw_input('What is th number of page you want to end? '))
-    while end_page < start_page:
-        print 'wrong input,the start is over the end.Try again please'
-        start_page = int(raw_input('What is th number of page you want to start? '))
-        end_page = int(raw_input('What is th number of page you want to end? '))
+    while True:
+        try:
+            start_page = int(raw_input('What is th number of page you want to start? '))
+            end_page = int(raw_input('What is th number of page you want to end? '))
+            if end_page < start_page:
+                print 'start is over end.'
+                continue
+        except:
+            print 'Invalid input,try again.'
+        else:
+            break
     for i in range(start_page,end_page+1):
         URL = 'http://jandan.net/ooxx/page-'
         base_url = URL + str(i)
