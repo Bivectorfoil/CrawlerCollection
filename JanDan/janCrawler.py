@@ -41,7 +41,7 @@ def getUrlList(base_url,index):
     return total_img_collections
 
 def Download(index):
-    log( 'now we crawling '+index)
+    log( 'now we are crawling '+index)
     save_dir = mkdirs(index)#storage directory
     conuts = 1#picture number
     urls = total_img_collections[index]
@@ -60,27 +60,16 @@ def Download(index):
         #log('Download %s,img%d'%(index,conuts))
         conuts += 1
 
-#def main():
-#    start = time.time()
-#    start_page = int(raw_input('What is th number of page you want to start? '))
-#    end_page = int(raw_input('What is th number of page you want to end? '))
-#    while end_page < start_page:
-#        print 'wrong input,the start is over the end.Try again please'
-#        start_page = int(raw_input('What is th number of page you want to start? '))
-#        end_page = int(raw_input('What is th number of page you want to end? '))
-#    for i in range(start_page,end_page+1):
-#        URL = 'http://jandan.net/ooxx/page-'
-#        base_url = URL + str(i)
-#        index = 'page%d' % i
-#        total_img_collections[index] = []
-#        #log('Crawling in page %d....' % i)
-#        getUrlList(base_url,index)
-#        Download(index)
-#        time.sleep(3)
-#    end = time.time()
-#    log('we all spend '+str(end-start) + ' seconds to crawl %d pages'%(end_page-start_page+1))
+def Guide():
+    '''Give the user a brief introduction to some of the features of the script'''
+
+    return log('The purpose of this small script is to grab the pictures of web page '+
+               'hope you would like it.'+'FYI,default crawl \n http://jandan.net/ooxx')
+
 def main():
     start = time.time()
+
+    Guide()
     while True:
         try:
             start_page = int(raw_input('What is th number of page you want to start? '))
@@ -97,10 +86,10 @@ def main():
         base_url = URL + str(i)
         index = 'page%d' % i
         total_img_collections[index] = []
-        #log('Crawling in page %d....' % i)
         getUrlList(base_url,index)
         Download(index)
         time.sleep(3)
+
     end = time.time()
     log('we all spend '+str(end-start) + ' seconds to crawl %d pages'%(end_page-start_page+1))
 
