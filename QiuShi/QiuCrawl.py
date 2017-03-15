@@ -2,7 +2,6 @@
 # encoding: utf-8
 
 import time
-import os
 import codecs
 import requests
 from bs4 import BeautifulSoup
@@ -10,11 +9,6 @@ from readqiushi import Read
 
 
 '''One small script to crawl the jokes(in the form of text) from http://qiushibaike.com/'''
-
-filename = 'qiushibaike.txt'
-exist = os.path.isfile(filename)
-if not exist:
-    os.mknod(filename)
 
 def crawl_joke_list_bs4(page=1):
     url = "http://qiushibaike.com/8hr/page/" + str(page)
@@ -25,7 +19,7 @@ def crawl_joke_list_bs4(page=1):
         joke_user = child.find('h2').string
         joke_content = ''.join(child.find('div',class_='content').stripped_strings)#remove extra spaces
         comp_joke = joke_user + '\t' + joke_content + '\n'
-        with codecs.open('qiushibaike.txt','a+','utf-8') as f:
+        with codecs.open('qiushibaike.txt','a','utf-8') as f:
             f.write(comp_joke)
     time.sleep(1)
 
