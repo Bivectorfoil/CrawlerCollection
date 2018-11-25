@@ -4,16 +4,17 @@
 '''A script to read file qiushibaike.txt'''
 
 
-def con_read(f,page=6):
-    for i in range(1,page+1):
+def con_read(f, page=6):
+    for i in range(1, page + 1):
         print f.readline()
     return
+
 
 def Read():
 
     try:
         f = open('qiushibaike.txt')
-    except IOError,e:
+    except IOError as e:
         print e
         print 'please check the directory if there is such file'
         exit()
@@ -27,10 +28,11 @@ def Read():
     while read_continue:
         flag = raw_input('continue reading?(y(Enter)/n) ')
         if flag != 'n':
-            con_read(f,page)
+            con_read(f, page)
         else:
             f.close()
             read_continue = False
+
 
 if __name__ == '__main__':
     Read()
